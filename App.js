@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   ActivityIndicator,
+  FlatList,
 } from 'react-native';
 
 import Todo from './Todo';
@@ -22,19 +23,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // Initialize Todo List!
-    /*
+    // Initialize Todo List
     let bigTodoList = [];
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 100; i++) {
       const nextTodo = Math.random().toString();
       bigTodoList.push(nextTodo);
+      if (i == 99) {
+        alert(nextTodo);
+      }
     }
     const loadedState = {
       loading: false,
       bigTodoList: bigTodoList,
     };
     this.setState(loadedState);
-    */
   }
 
   render() {
@@ -45,7 +47,6 @@ class App extends React.Component {
 
           <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
             <Text style={{textAlign: 'center'}}>Ten Thousand Todos...</Text>
-            <Todo todo="foo" />
           </View>
 
           <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
@@ -56,7 +57,20 @@ class App extends React.Component {
       );
     }
 
-    // TODO: Write return() method for loaded state...
+    // If application has finished loading, render the bigTodoList:
+    return(
+      <SafeAreaView style={{flex: 100}}>
+
+        <FlatList
+          key="big-todo-list-key"
+          data={this.state.bigTodoList}
+          renderItem={({ item }) => (
+            <Todo todo={item} />
+          )}
+          keyExtractor={ (item, index) => item.toString() }/>
+
+      </SafeAreaView>
+    );
   }
 }
 
