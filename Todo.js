@@ -13,6 +13,16 @@ import {
 class Todo extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      completed: false,
+    }
+  }
+
+  toggle() {
+    const toggledState = {
+      completed: !this.state.completed,
+    };
+    this.setState(toggledState);
   }
 
   render() {
@@ -20,11 +30,13 @@ class Todo extends React.PureComponent {
     <View style={{flexDirection: 'row', flex: 100}}>
 
         <View style={{flex: 75}}>
-          <Text style={{fontSize: 20, textDecorationLine: 'line-through'}}>{this.props.todo}</Text>
+          <Text style={{fontSize: 20, textDecorationLine: this.state.completed ? 'line-through' : 'none'}}>{this.props.todo}</Text>
         </View>
 
         <View style={{flex: 25}}>
-          <Button title={ this.props.completed ? "Done!" : "X"}/>
+          <Button 
+            title={ this.state.completed ? "Undo" : "X"}
+            onPress={ () => this.toggle() } />
         </View>
 
     </View>

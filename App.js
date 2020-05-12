@@ -68,8 +68,7 @@ class App extends React.PureComponent {
             data={this.state.bigTodoList}
             renderItem={({ item }) => (
               <Todo 
-                todo={item} 
-                completed={false} />
+                todo={item} />
             )}
             keyExtractor={ (item, index) => item.toString() }/>
         </View>
