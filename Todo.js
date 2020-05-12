@@ -17,7 +17,7 @@ class Todo extends React.Component {
   render() {
     return(
     <View>
-        <Text>{this.props.todo}</Text>
+        <Text style={{fontSize: 20}}>{this.props.todo}</Text>
     </View>
     );
   }
