@@ -25,7 +25,7 @@ class App extends React.Component {
   componentDidMount() {
     // Initialize Todo List
     let bigTodoList = [];
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 10000; i++) {
       const nextTodo = Math.random().toString();
       bigTodoList.push(nextTodo);
     }
