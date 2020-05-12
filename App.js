@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 
 class App extends React.Component {
@@ -17,8 +18,16 @@ class App extends React.Component {
 
   render() {
     return(
-      <SafeAreaView>
-        <Text>Ten Thousand Todos...</Text>
+      <SafeAreaView style={{flex: 100}}>
+
+        <View style={{flex: 15, backgroundColor: 'pink', justifyContent: 'center'}}>
+          <Text style={{textAlign: 'center'}}>Ten Thousand Todos...</Text>
+        </View>
+
+        <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'purple'}}>
+          <ActivityIndicator />
+        </View>
+
       </SafeAreaView>
     );
   }
