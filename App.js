@@ -28,9 +28,6 @@ class App extends React.Component {
     for (var i = 0; i < 100; i++) {
       const nextTodo = Math.random().toString();
       bigTodoList.push(nextTodo);
-      if (i == 99) {
-        alert(nextTodo);
-      }
     }
     const loadedState = {
       loading: false,
@@ -61,13 +58,19 @@ class App extends React.Component {
     return(
       <SafeAreaView style={{flex: 100}}>
 
-        <FlatList
-          key="big-todo-list-key"
-          data={this.state.bigTodoList}
-          renderItem={({ item }) => (
-            <Todo todo={item} />
-          )}
-          keyExtractor={ (item, index) => item.toString() }/>
+        <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
+          <Text style={{textAlign: 'center'}}>Ten Thousand Todos...</Text>
+        </View>
+
+        <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
+          <FlatList
+            key="big-todo-list-key"
+            data={this.state.bigTodoList}
+            renderItem={({ item }) => (
+              <Todo todo={item} />
+            )}
+            keyExtractor={ (item, index) => item.toString() }/>
+        </View>
 
       </SafeAreaView>
     );
