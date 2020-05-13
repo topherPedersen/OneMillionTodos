@@ -25,7 +25,7 @@ class App extends React.PureComponent {
   componentDidMount() {
     // Initialize Todo List
     let bigTodoList = [];
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 1000000; i++) {
       const nextTodo = Math.random().toString();
       bigTodoList.push(nextTodo);
     }
@@ -43,7 +43,7 @@ class App extends React.PureComponent {
         <SafeAreaView style={{flex: 100}}>
 
           <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
-            <Text style={{textAlign: 'center'}}>Ten Thousand Todos...</Text>
+            <Text style={{textAlign: 'center'}}>One Million Todos...</Text>
           </View>
 
           <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
@@ -59,7 +59,8 @@ class App extends React.PureComponent {
       <SafeAreaView style={{flex: 100}}>
 
         <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
-          <Text style={{textAlign: 'center'}}>Ten Thousand Todos...</Text>
+          <Text style={{textAlign: 'center'}}>One Million Todos...</Text>
+          <Text>Todo Count: {this.state.bigTodoList.length.toString()}</Text>
         </View>
 
         <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
