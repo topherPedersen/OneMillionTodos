@@ -19,17 +19,41 @@ import {
   Provider 
 } from 'react-redux';
 
+function randomStr() {
+  let a = Math.random().toString(36).substring(2);
+  let b = Math.random().toString(36).substring(2);
+  let c = Math.random().toString(36).substring(2);
+  let uniqueStringOfRandomCharacters = a + b + c;
+  return uniqueStringOfRandomCharacters;
+}
+
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true,
+      todos: [],
     };
   }
 
+  componentDidMount() {
+
+    // Create an array of 1,000,000 todos
+    let oneMillionTodos = [];
+    for (var i = 0; i < 1000000; i++) {
+      const nextTodo = {
+        id: randomStr(),
+        task: randomStr(),
+      };
+      oneMillionTodos.push(nextTodo);
+    }
+
+    // Update the Redux Store with 1,000,000 todos
+    this.props.addOneMillionTodos(oneMillionTodos);
+  }
+
   render() {
-    if (this.state.loading) {
+    if (this.props.todos.loading) {
       return(
         <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
         <ActivityIndicator />
@@ -38,8 +62,8 @@ class TodoList extends React.Component {
     }
 
     return (
-      <SafeAreaView>
-        <Text>One Million Todos!</Text>
+      <SafeAreaView  style={{flex: 1, justifyContent: 'center'}}>
+        <Text>One Million Todos Loaded!</Text>
       </SafeAreaView>
     )
   }

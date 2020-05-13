@@ -1,4 +1,5 @@
 const initialState = {
+  loading: true,
   item: [],
 };
   
@@ -15,6 +16,7 @@ switch (action.type) {
     const newState = {...state};
     const oneMillionTodos = action.payload;
     newState.item = oneMillionTodos;
+    newState.loading = false;
     return newState;
     default:
     return {...state};
