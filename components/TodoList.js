@@ -22,8 +22,7 @@ import {
 function randomStr() {
   let a = Math.random().toString(36).substring(2);
   let b = Math.random().toString(36).substring(2);
-  let c = Math.random().toString(36).substring(2);
-  let uniqueStringOfRandomCharacters = a + b + c;
+  let uniqueStringOfRandomCharacters = a + b;
   return uniqueStringOfRandomCharacters;
 }
 

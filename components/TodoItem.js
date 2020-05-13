@@ -37,7 +37,7 @@ class TodoItem extends React.PureComponent {
     <View style={{flexDirection: 'row', flex: 100}}>
 
         <View style={{flex: 75}}>
-          <Text style={{fontSize: 20, textDecorationLine: this.state.completed ? 'line-through' : 'none'}}>{this.props.task}</Text>
+          <Text style={{fontSize: 16, textDecorationLine: this.state.completed ? 'line-through' : 'none'}}>{this.props.task}</Text>
         </View>
 
         <View style={{flex: 25}}>
