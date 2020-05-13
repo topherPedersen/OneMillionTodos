@@ -20,7 +20,23 @@ import {
 } from 'react-redux';
 
 class TodoList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+    };
+  }
+
   render() {
+    if (this.state.loading) {
+      return(
+        <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+        <ActivityIndicator />
+      </SafeAreaView>
+      );
+    }
+
     return (
       <SafeAreaView>
         <Text>One Million Todos!</Text>
