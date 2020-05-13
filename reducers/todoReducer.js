@@ -13,11 +13,14 @@ if (typeof state === 'undefined') {
 
 switch (action.type) {
     case 'ADD_ONE_MILLION_TODOS':
-    const newState = {...state};
-    const oneMillionTodos = action.payload;
-    newState.item = oneMillionTodos;
-    newState.loading = false;
-    return newState;
+      const newState = {...state};
+      const oneMillionTodos = action.payload;
+      newState.item = oneMillionTodos;
+      newState.loading = false;
+      return newState;
+    case 'MARK_COMPLETED':
+      // TODO: Finish this reducer!
+      return {...state};
     default:
     return {...state};
 }

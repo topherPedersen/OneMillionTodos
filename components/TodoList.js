@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 // Import Components
-// import TodoItem from './TodoItem';
+import TodoItem from './TodoItem';
 
 // Import React-Redux
 import { 
@@ -27,7 +27,9 @@ function randomStr() {
   return uniqueStringOfRandomCharacters;
 }
 
-class TodoList extends React.Component {
+// IMPORTANT! Use React.PureComponent instead of React.Component
+// Make sure to explain this in tutorial.
+class TodoList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -64,6 +66,7 @@ class TodoList extends React.Component {
     // 'this' we are talking about and our app will crash.
     // ----------------------------------------------
     const addOneMillionTodos = (todos) => this.props.addOneMillionTodos(todos);
+    const setState = (state) => this.setState(state);
     setTimeout( () => {
       // Create an array of 1,000,000 todos
       let oneMillionTodos = [];
@@ -74,6 +77,9 @@ class TodoList extends React.Component {
         };
         oneMillionTodos.push(nextTodo);
       }
+
+      // Update Local State with 1,000,000 todos
+      setState({todos: oneMillionTodos});
 
       // Update the Redux Store with 1,000,000 todos
       addOneMillionTodos(oneMillionTodos);
@@ -91,8 +97,23 @@ class TodoList extends React.Component {
     }
 
     return (
-      <SafeAreaView  style={{flex: 1, justifyContent: 'center'}}>
-        <Text style={{textAlign: 'center'}}>One million todos loaded!</Text>
+      <SafeAreaView style={{flex: 100}}>
+
+        <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
+          <Text style={{textAlign: 'center'}}>One Million Todos</Text>
+        </View>
+
+        <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
+          <FlatList
+            key="big-todo-list-key"
+            data={this.state.todos}
+            renderItem={({ item }) => (
+              <TodoItem 
+                task={item.task} />
+            )}
+            keyExtractor={ (item, index) => item.id }/>
+        </View>
+
       </SafeAreaView>
     )
   }
