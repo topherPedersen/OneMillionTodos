@@ -99,7 +99,6 @@ class TodoList extends React.PureComponent {
       completed: false,
     };
 
-
     // NOTE: had trouble getting .concat method to work in react-native.
     // Append old list to new list using a for loop instead.
     let oneMillionPlusTodosArray = [];
@@ -108,23 +107,13 @@ class TodoList extends React.PureComponent {
       oneMillionPlusTodosArray[i + 1] = oldTodoList[i];
     }
 
-    /*
-    const oneMillionPlusTodosCONST = oneMillionPlusTodosArray;
- 
-    const newTodosState = {
-      todosArray: oneMillionPlusTodosCONST,
-    };
-
-    this.setState(newTodosState);
-    */
-
+    // Update UI with new TODO
     this.setState({todosArray: oneMillionPlusTodosArray});
 
     // ADD_ONE_TODO to Redux Store
     const addOneTodo = (todo) => this.props.addOneTodo(todo);
     setTimeout( () => {
       addOneTodo(newTodo);
-      //alert("addNewTodo complete?");
     }, 0);
   }
 
