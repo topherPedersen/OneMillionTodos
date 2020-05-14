@@ -91,27 +91,44 @@ class TodoList extends React.PureComponent {
 
   // NOTE: This method will add the todo to the TOP of the TODO list...
   addNewTodo() {
-    const oldTodoList = this.props.todos.item; // Associative Array
+    let oldTodoList = this.state.todosArray;
+
     const newTodo = {
       id: "NewID-" + Math.random().toString(36).substring(2),
       task: "NewTODO-" + Math.random().toString(36).substring(2),
       completed: false,
     };
-    
-    // Create an associative array to store all of our todos
-    let oneMillionPlusTodos = [];
-    let oneMillionPlusTodosArray = [];
-    oneMillionPlusTodos[newTodo.id] = newTodo;
-    oneMillionPlusTodosArray[0] = newTodo;
-    // Add all of the old todos to our associative array
-    for (var key in oldTodoList) {
-      oneMillionPlusTodos[key] = oldTodoList[key];
-      oneMillionPlusTodosArray.push(oldTodoList[key]);
-    }
 
-    // Update the UI to display the new TODO item
-    // (should be displayed at the TOP of the todo list)
-    this.setState({todosArray: oneMillionPlusTodosArray});
+    const fooTodo = {
+      id: "NewID-" + Math.random().toString(36).substring(2),
+      task: "NewTODO-" + Math.random().toString(36).substring(2),
+      completed: false,
+    };
+
+    const barTodo = {
+      id: "NewID-" + Math.random().toString(36).substring(2),
+      task: "NewTODO-" + Math.random().toString(36).substring(2),
+      completed: false,
+    };
+
+    const bazTodo = {
+      id: "NewID-" + Math.random().toString(36).substring(2),
+      task: "NewTODO-" + Math.random().toString(36).substring(2),
+      completed: false,
+    };
+
+    let oneMillionPlusTodosArray = [];
+    oneMillionPlusTodosArray[0] = newTodo;
+    oneMillionPlusTodosArray[1] = fooTodo;
+    oneMillionPlusTodosArray[2] = barTodo;
+    oneMillionPlusTodosArray[3] = bazTodo;
+    const oneMillionPlusTodosCONST = oneMillionPlusTodosArray;
+ 
+    const newTodosState = {
+      todosArray: oneMillionPlusTodosCONST,
+    };
+
+    this.setState(newTodosState);
 
     // ADD_ONE_TODO to Redux Store
     const addOneTodo = (todo) => this.props.addOneTodo(todo);
