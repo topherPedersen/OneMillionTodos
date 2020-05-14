@@ -8,6 +8,7 @@ import {
   StatusBar,
   ActivityIndicator,
   FlatList,
+  Button,
 } from 'react-native';
 
 // Import Components
@@ -88,6 +89,32 @@ class TodoList extends React.PureComponent {
     }, 0);
   }
 
+  // NOTE: This method will add the todo to the TOP of the TODO list...
+  addNewTodo() {
+    const oldTodoList = this.props.todos; // Associative Array
+    const newTodo = {
+      id: "NewID-" + Math.random().toString(36).substring(2),
+      task: "NewTODO-" + Math.random().toString(36).substring(2),
+      completed: false,
+    };
+    let oneMillionPlusTodos = [];
+    oneMillionPlusTodos = oldTodoList;
+    oneMillionPlusTodos[newTodo.id] = newTodo;
+    let oneMillionPlusTodosArray = [];
+    oneMillionPlusTodosArray[0] = newTodo;
+    // Loop through oldTodoList associative array, and append
+    // oldTodoList items to the new todo list array
+    for (var key in oldTodoList) {
+      oneMillionPlusTodosArray.push(oldTodoList[key]);
+    }
+    this.props.addOneTodo(newTodo);
+    alert("addNewTodo complete?");
+
+    // TODO: Actually add the new todo item to the FlatList below
+    // as right now it is ONLY in the Redux Store, but is not
+    // actually displayed in the UI
+  }
+
   render() {
     if (this.props.todos.loading) {
       return(
@@ -103,6 +130,9 @@ class TodoList extends React.PureComponent {
 
         <View style={{flex: 15, backgroundColor: 'white', justifyContent: 'center'}}>
           <Text style={{textAlign: 'center'}}>One Million Todos</Text>
+          <Button 
+            title="Add New Todo"
+            onPress={ () => this.addNewTodo() } />
         </View>
 
         <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
@@ -126,6 +156,7 @@ class TodoList extends React.PureComponent {
 const mapDispatchToProps = dispatch => {
   return {
     addOneMillionTodos: (payload) => dispatch({type: 'ADD_ONE_MILLION_TODOS', payload: payload}),
+    addOneTodo: (payload) => dispatch({type: 'ADD_ONE_TODO', payload: payload}),
   };
 };
 const mapStateToProps = (state) => {

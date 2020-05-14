@@ -28,6 +28,11 @@ switch (action.type) {
         const notCompletedTaskId = action.payload;
         markNotCompletedState.item[notCompletedTaskId].completed = false;
         return markNotCompletedState;
+      case 'ADD_ONE_TODO':
+        const addOneTodoState = {...state};
+        const newTodo = action.payload;
+        addOneTodoState.item[newTodo.id] = newTodo;
+        return addOneTodoState;
     default:
       return {...state};
 }
