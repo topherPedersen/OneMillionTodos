@@ -33,7 +33,7 @@ class TodoList extends React.PureComponent {
     super(props);
 
     this.state = {
-      todos: [],
+      todosArray: [],
     };
   }
 
@@ -68,17 +68,20 @@ class TodoList extends React.PureComponent {
     const setState = (state) => this.setState(state);
     setTimeout( () => {
       // Create an array of 1,000,000 todos
-      let oneMillionTodos = [];
+      let oneMillionTodos = []; // Associative Array
+      let oneMillionTodosArray = []; // Numerically Indexed Array
       for (var i = 0; i < 1000000; i++) {
         const nextTodo = {
           id: randomStr(),
           task: randomStr(),
+          completed: false,
         };
-        oneMillionTodos.push(nextTodo);
+        oneMillionTodos[nextTodo.id] = nextTodo;
+        oneMillionTodosArray.push(nextTodo);
       }
 
       // Update Local State with 1,000,000 todos
-      setState({todos: oneMillionTodos});
+      setState({todosArray: oneMillionTodosArray});
 
       // Update the Redux Store with 1,000,000 todos
       addOneMillionTodos(oneMillionTodos);
@@ -89,7 +92,7 @@ class TodoList extends React.PureComponent {
     if (this.props.todos.loading) {
       return(
         <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-        <ActivityIndicator />
+          <ActivityIndicator />
         <Text style={{textAlign: 'center'}}>Loading one million todos...</Text>
       </SafeAreaView>
       );
@@ -105,9 +108,11 @@ class TodoList extends React.PureComponent {
         <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
           <FlatList
             key="big-todo-list-key"
-            data={this.state.todos}
+            data={this.state.todosArray}
             renderItem={({ item }) => (
               <TodoItem 
+                id={item.id}
+                completed={item.completed}
                 task={item.task} />
             )}
             keyExtractor={ (item, index) => item.id }/>

@@ -19,10 +19,17 @@ switch (action.type) {
       newState.loading = false;
       return newState;
     case 'MARK_COMPLETED':
-      // TODO: Finish this reducer!
-      return {...state};
+      const markCompletedState = {...state};
+      const completedTaskId = action.payload;
+      markCompletedState.item[completedTaskId].completed = true;
+      return markCompletedState;
+      case 'MARK_NOT_COMPLETED':
+        const markNotCompletedState = {...state};
+        const notCompletedTaskId = action.payload;
+        markNotCompletedState.item[notCompletedTaskId].completed = false;
+        return markNotCompletedState;
     default:
-    return {...state};
+      return {...state};
 }
 
   // If none of the conditions above are true,

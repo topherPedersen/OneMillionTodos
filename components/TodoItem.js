@@ -25,11 +25,32 @@ class TodoItem extends React.PureComponent {
     }
   }
 
-  toggle() {
+  markCompleted() {
+
     const toggledState = {
-      completed: !this.state.completed,
+      completed: true,
     };
     this.setState(toggledState);
+
+    const completedTodoId = this.props.id;
+    const dispatchMarkCompleted = (id) => this.props.markCompleted(id);
+    setTimeout( () => {
+      dispatchMarkCompleted(completedTodoId);
+    }, 0);
+  }
+
+  markNotCompleted() {
+
+    const toggledState = {
+      completed: false,
+    };
+    this.setState(toggledState);
+
+    const notCompletedTodoId = this.props.id;
+    const dispatchMarkNotCompleted = (id) => this.props.markNotCompleted(id);
+    setTimeout( () => {
+      dispatchMarkNotCompleted(notCompletedTodoId);
+    }, 0);
   }
 
   render() {
@@ -43,7 +64,9 @@ class TodoItem extends React.PureComponent {
         <View style={{flex: 25}}>
           <Button 
             title={ this.state.completed ? "Undo" : "X"}
-            onPress={ () => this.toggle() } />
+            onPress={ () => { 
+              this.state.completed ? this.markNotCompleted() : this.markCompleted();
+            }} />
         </View>
 
     </View>
@@ -54,6 +77,7 @@ class TodoItem extends React.PureComponent {
 const mapDispatchToProps = dispatch => {
   return {
     markCompleted: (payload) => dispatch({type: 'MARK_COMPLETED', payload: payload}),
+    markNotCompleted: (payload) => dispatch({type: 'MARK_NOT_COMPLETED', payload: payload}),
   };
 };
 export default connect(null, mapDispatchToProps)(TodoItem);
