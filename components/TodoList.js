@@ -119,12 +119,10 @@ class TodoList extends React.PureComponent {
 
   checkReduxStore() {
     const reduxSnapShot = this.props.todos.item;
-    let firstTodo;
-    for (var key in reduxSnapShot) {
-      firstTodo = reduxSnapShot[key];
-      break;
-    }
-    alert(JSON.stringify(firstTodo));
+    const localStateSnapshot = this.state.todosArray;
+    const keyOfMostRecentTodo = localStateSnapshot[0].id;
+    const needle = reduxSnapShot[keyOfMostRecentTodo];
+    alert(JSON.stringify(needle));
   }
 
   render() {
