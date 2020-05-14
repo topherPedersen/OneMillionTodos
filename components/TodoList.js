@@ -91,7 +91,7 @@ class TodoList extends React.PureComponent {
 
   // NOTE: This method will add the todo to the TOP of the TODO list...
   addNewTodo() {
-    let oldTodoList = this.state.todosArray;
+    const oldTodoList = this.state.todosArray;
 
     const newTodo = {
       id: "NewID-" + Math.random().toString(36).substring(2),
@@ -99,6 +99,7 @@ class TodoList extends React.PureComponent {
       completed: false,
     };
 
+    /*
     const fooTodo = {
       id: "NewID-" + Math.random().toString(36).substring(2),
       task: "NewTODO-" + Math.random().toString(36).substring(2),
@@ -116,12 +117,20 @@ class TodoList extends React.PureComponent {
       task: "NewTODO-" + Math.random().toString(36).substring(2),
       completed: false,
     };
+    */
 
     let oneMillionPlusTodosArray = [];
     oneMillionPlusTodosArray[0] = newTodo;
+    for (var i = 0; i < 13; i++) {
+      oneMillionPlusTodosArray[i + 1] = oldTodoList[i];
+    }
+    /*
     oneMillionPlusTodosArray[1] = fooTodo;
     oneMillionPlusTodosArray[2] = barTodo;
     oneMillionPlusTodosArray[3] = bazTodo;
+    */
+    // oneMillionPlusTodosArray.concat(oldTodoList);
+
     const oneMillionPlusTodosCONST = oneMillionPlusTodosArray;
  
     const newTodosState = {
