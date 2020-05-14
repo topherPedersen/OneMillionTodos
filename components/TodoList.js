@@ -97,20 +97,21 @@ class TodoList extends React.PureComponent {
       task: "NewTODO-" + Math.random().toString(36).substring(2),
       completed: false,
     };
+    
+    // Create an associative array to store all of our todos
     let oneMillionPlusTodos = [];
-    oneMillionPlusTodos = oldTodoList;
-    oneMillionPlusTodos[newTodo.id] = newTodo;
     let oneMillionPlusTodosArray = [];
+    oneMillionPlusTodos[newTodo.id] = newTodo;
     oneMillionPlusTodosArray[0] = newTodo;
-    // Loop through oldTodoList associative array, and append
-    // oldTodoList items to the new todo list array
+    // Add all of the old todos to our associative array
     for (var key in oldTodoList) {
+      oneMillionPlusTodos[key] = oldTodoList[key];
       oneMillionPlusTodosArray.push(oldTodoList[key]);
     }
 
     // Update the UI to display the new TODO item
     // (should be displayed at the TOP of the todo list)
-    this.setState({todosArray: oneMillionPlusTodosArray,});
+    this.setState({todosArray: oneMillionPlusTodosArray});
 
     // ADD_ONE_TODO to Redux Store
     const addOneTodo = (todo) => this.props.addOneTodo(todo);
