@@ -91,7 +91,7 @@ class TodoList extends React.PureComponent {
 
   // NOTE: This method will add the todo to the TOP of the TODO list...
   addNewTodo() {
-    const oldTodoList = this.props.todos; // Associative Array
+    const oldTodoList = this.props.todos.item; // Associative Array
     const newTodo = {
       id: "NewID-" + Math.random().toString(36).substring(2),
       task: "NewTODO-" + Math.random().toString(36).substring(2),
@@ -107,12 +107,17 @@ class TodoList extends React.PureComponent {
     for (var key in oldTodoList) {
       oneMillionPlusTodosArray.push(oldTodoList[key]);
     }
-    this.props.addOneTodo(newTodo);
-    alert("addNewTodo complete?");
 
-    // TODO: Actually add the new todo item to the FlatList below
-    // as right now it is ONLY in the Redux Store, but is not
-    // actually displayed in the UI
+    // Update the UI to display the new TODO item
+    // (should be displayed at the TOP of the todo list)
+    this.setState({todosArray: oneMillionPlusTodosArray,});
+
+    // ADD_ONE_TODO to Redux Store
+    const addOneTodo = (todo) => this.props.addOneTodo(todo);
+    setTimeout( () => {
+      addOneTodo(newTodo);
+      //alert("addNewTodo complete?");
+    }, 0);
   }
 
   render() {
