@@ -117,6 +117,16 @@ class TodoList extends React.PureComponent {
     }, 0);
   }
 
+  checkReduxStore() {
+    const reduxSnapShot = this.props.todos.item;
+    let firstTodo;
+    for (var key in reduxSnapShot) {
+      firstTodo = reduxSnapShot[key];
+      break;
+    }
+    alert(JSON.stringify(firstTodo));
+  }
+
   render() {
     if (this.props.todos.loading) {
       return(
@@ -135,6 +145,9 @@ class TodoList extends React.PureComponent {
           <Button 
             title="Add New Todo"
             onPress={ () => this.addNewTodo() } />
+          <Button 
+            title="Check Redux for First TODO"
+            onPress={ () => this.checkReduxStore() } />
         </View>
 
         <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
