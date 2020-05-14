@@ -121,7 +121,7 @@ class TodoList extends React.PureComponent {
 
     let oneMillionPlusTodosArray = [];
     oneMillionPlusTodosArray[0] = newTodo;
-    for (var i = 0; i < 13; i++) {
+    for (var i = 0; i < oldTodoList.length; i++) {
       oneMillionPlusTodosArray[i + 1] = oldTodoList[i];
     }
     /*
