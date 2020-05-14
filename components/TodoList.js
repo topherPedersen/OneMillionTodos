@@ -99,38 +99,16 @@ class TodoList extends React.PureComponent {
       completed: false,
     };
 
-    /*
-    const fooTodo = {
-      id: "NewID-" + Math.random().toString(36).substring(2),
-      task: "NewTODO-" + Math.random().toString(36).substring(2),
-      completed: false,
-    };
 
-    const barTodo = {
-      id: "NewID-" + Math.random().toString(36).substring(2),
-      task: "NewTODO-" + Math.random().toString(36).substring(2),
-      completed: false,
-    };
-
-    const bazTodo = {
-      id: "NewID-" + Math.random().toString(36).substring(2),
-      task: "NewTODO-" + Math.random().toString(36).substring(2),
-      completed: false,
-    };
-    */
-
+    // NOTE: had trouble getting .concat method to work in react-native.
+    // Append old list to new list using a for loop instead.
     let oneMillionPlusTodosArray = [];
     oneMillionPlusTodosArray[0] = newTodo;
     for (var i = 0; i < oldTodoList.length; i++) {
       oneMillionPlusTodosArray[i + 1] = oldTodoList[i];
     }
-    /*
-    oneMillionPlusTodosArray[1] = fooTodo;
-    oneMillionPlusTodosArray[2] = barTodo;
-    oneMillionPlusTodosArray[3] = bazTodo;
-    */
-    // oneMillionPlusTodosArray.concat(oldTodoList);
 
+    /*
     const oneMillionPlusTodosCONST = oneMillionPlusTodosArray;
  
     const newTodosState = {
@@ -138,6 +116,9 @@ class TodoList extends React.PureComponent {
     };
 
     this.setState(newTodosState);
+    */
+
+    this.setState({todosArray: oneMillionPlusTodosArray});
 
     // ADD_ONE_TODO to Redux Store
     const addOneTodo = (todo) => this.props.addOneTodo(todo);
