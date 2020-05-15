@@ -1,4 +1,4 @@
-package com.tenthousandtodos;
+package blog.topherpedersen.onemilliontodos;
 
 import android.app.Application;
 import android.content.Context;

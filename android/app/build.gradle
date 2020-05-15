@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tenthousandtodos"
+        applicationId "blog.topherpedersen.onemilliontodos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
