@@ -89,40 +89,41 @@ class TodoList extends React.PureComponent {
     }, 0);
   }
 
-  // NOTE: This method will add the todo to the TOP of the TODO list...
   addNewTodo() {
-    const oldTodoList = this.state.todosArray;
+    // Array containing the entire todo (minus the new todo we wish to add)
+    const oldTodosArray = this.state.todosArray;
 
+    // Object containing our new todo item
     const newTodo = {
       id: "NewID-" + Math.random().toString(36).substring(2),
       task: "NewTODO-" + Math.random().toString(36).substring(2),
       completed: false,
     };
 
-    // NOTE: had trouble getting .concat method to work in react-native.
-    // Append old list to new list using a for loop instead.
-    let oneMillionPlusTodosArray = [];
-    oneMillionPlusTodosArray[0] = newTodo;
-    for (var i = 0; i < oldTodoList.length; i++) {
-      oneMillionPlusTodosArray[i + 1] = oldTodoList[i];
-    }
+    // Create a new array which contains our new todo item at index 0,
+    // along with all of the previously added todo items
+    let newTodoArray = [newTodo];
+    const oneMillionPlusTodosArray = newTodoArray.concat(oldTodosArray);
 
-    // Update UI with new TODO
+    // Update the UI to display our newly added todo item
     this.setState({todosArray: oneMillionPlusTodosArray});
 
-    // ADD_ONE_TODO to Redux Store
+    // Update the Redux Store to include our new todo item
     const addOneTodo = (todo) => this.props.addOneTodo(todo);
     setTimeout( () => {
       addOneTodo(newTodo);
     }, 0);
   }
 
-  checkReduxStore() {
+  // Query the Redux Store and display information
+  // regarding the first todo item listed in the 
+  // store.
+  queryReduxForFirstTodo() {
     const reduxSnapShot = this.props.todos.item;
     const localStateSnapshot = this.state.todosArray;
     const keyOfMostRecentTodo = localStateSnapshot[0].id;
-    const needle = reduxSnapShot[keyOfMostRecentTodo];
-    alert(JSON.stringify(needle));
+    const firstTodo = reduxSnapShot[keyOfMostRecentTodo];
+    alert(JSON.stringify(firstTodo));
   }
 
   render() {
@@ -144,8 +145,8 @@ class TodoList extends React.PureComponent {
             title="Add New Todo"
             onPress={ () => this.addNewTodo() } />
           <Button 
-            title="Check Redux for First TODO"
-            onPress={ () => this.checkReduxStore() } />
+            title="Retrieve First TODO from Redux"
+            onPress={ () => this.queryReduxForFirstTodo() } />
         </View>
 
         <View style={{flex: 85, justifyContent: 'center', backgroundColor: 'white'}}>
