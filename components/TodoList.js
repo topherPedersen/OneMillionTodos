@@ -20,6 +20,9 @@ import {
   Provider 
 } from 'react-redux';
 
+// Generate a random string of characters.
+// We will use these random strings of characters
+// to represent "todo" items in our todo list
 function randomStr() {
   let a = Math.random().toString(36).substring(2);
   let b = Math.random().toString(36).substring(2);
@@ -28,7 +31,6 @@ function randomStr() {
 }
 
 // IMPORTANT! Use React.PureComponent instead of React.Component
-// Make sure to explain this in tutorial.
 class TodoList extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -41,9 +43,7 @@ class TodoList extends React.PureComponent {
   componentDidMount() {
 
     // ----------------------------------------------
-    // *** IMPORTANT *** 
-    // ----------------------------------------------
-    // (NOTE: EXPLAIN THIS IN THE TUTORIAL)
+    //             *** IMPORTANT! *** 
     // ----------------------------------------------
     // We need to wrap our expensive long running
     // action below in a setTimeout function to 
@@ -53,14 +53,8 @@ class TodoList extends React.PureComponent {
     // If we do not do this little trick, the screen
     // will simply display a white blank screen while
     // we generate our 1,000,000 todo items.
-    // ----------------------------------------------
-
-    // ----------------------------------------------
-    // *** IMPORTANT *** 
-    // ----------------------------------------------
-    // (NOTE: EXPLAIN THIS IN THE TUTORIAL)
-    // ----------------------------------------------
-    // Sidenote, we need to declare constants for anything
+    //
+    // Please note that we need to declare constants for anything
     // involving 'this' that we wish to run inside our setTimeout.
     // If we do not do this, the function will not know which
     // 'this' we are talking about and our app will crash.
@@ -127,6 +121,8 @@ class TodoList extends React.PureComponent {
   }
 
   render() {
+
+    // Display loading spinner on initial app load
     if (this.props.todos.loading) {
       return(
         <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
@@ -136,6 +132,8 @@ class TodoList extends React.PureComponent {
       );
     }
 
+    // After we have finished generating our list of 1,000,000 
+    // todos, display the todo list in a FlatList
     return (
       <SafeAreaView style={{flex: 100}}>
 

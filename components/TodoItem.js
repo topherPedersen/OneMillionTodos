@@ -25,6 +25,7 @@ class TodoItem extends React.PureComponent {
     }
   }
 
+  // Mark a todo item as completed
   markCompleted() {
 
     const toggledState = {
@@ -39,6 +40,7 @@ class TodoItem extends React.PureComponent {
     }, 0);
   }
 
+  // Mark a todo item as NOT completed
   markNotCompleted() {
 
     const toggledState = {
